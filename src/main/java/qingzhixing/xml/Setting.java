@@ -3,11 +3,8 @@ package qingzhixing.xml;
 import org.apache.logging.log4j.*;
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import qingzhixing.utilities.FileConstructor;
-
-import java.io.IOException;
 
 public final class Setting {
     private static final Logger logger = LogManager.getLogger(Setting.class);
@@ -17,10 +14,10 @@ public final class Setting {
     }
 
     private static Long botQQ;
-    private static String botPassword;
+    private static Long masterQQ;
 
-    public static String botPassword() {
-        return botPassword;
+    public static Long masterQQ() {
+        return masterQQ;
     }
 
     // 解析xml构造静态变量
@@ -30,14 +27,11 @@ public final class Setting {
             Document document = builder.build(FileConstructor.getInnerResource("/settings-private.xml"));
             Element root = document.getRootElement();
 
-            botQQ = Long.parseLong(root.getChild("QQ").getText());
-            botPassword = root.getChild("Password").getText();
-
-            assert(botQQ != null);
-            assert(botPassword != null);
+            botQQ = Long.parseLong(root.getChild("botQQ").getText());
+            masterQQ = Long.parseLong(root.getChild("masterQQ").getText());
 
             logger.debug("botQQ: " + botQQ);
-            logger.debug("botPassword: " + botPassword);
+            logger.debug("masterQQ: " + masterQQ);
         } catch (Exception e) {
             logger.warn("Exception Occur!");
             logger.warn(e.getMessage());
