@@ -1,6 +1,6 @@
 <root>
     <!-- 是否启用该配置文件 -->
-    <Enable>True</Enable>
+    <Enabled>True</Enabled>
     <BotQQ>3239655448</BotQQ>
     <MasterQQ>1542053897</MasterQQ>
 </root>

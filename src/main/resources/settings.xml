@@ -1,6 +1,6 @@
 <root>
     <!-- 是否启用该配置文件 -->
-    <Enable>False</Enable>
+    <Enabled>False</Enabled>
     <BotQQ>Your Bot QQ</BotQQ>
     <MasterQQ>Your QQ</MasterQQ>
 </root>

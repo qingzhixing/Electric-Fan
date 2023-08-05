@@ -26,7 +26,7 @@ public final class Main {
         logger.debug("Test Log4j");
 
         Bot bot=ConstructBot();
-        bot.login();
+//        bot.login();
 
         Friend master = bot.getFriend(Setting.masterQQ());
 

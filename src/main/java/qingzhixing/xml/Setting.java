@@ -20,24 +20,62 @@ public final class Setting {
         return masterQQ;
     }
 
-    // 解析xml构造静态变量
-    static{
+    /*
+     * 用于解析jar包内的xml文件
+     * @param path xml文件路径
+     * @return 返回是否设置合法
+     */
+    private static boolean ParseInnerSettingsFile(String path){
+        logger.debug("  parsing: "+path);
         SAXBuilder builder = new SAXBuilder();
         try {
-            logger.debug("Parsing private settings xml start:");
-            Document document = builder.build(FileConstructor.getInnerResource("/settings-private.xml"));
+
+            Document document = builder.build(FileConstructor.getInnerResource(path));
             Element root = document.getRootElement();
 
-            botQQ = Long.parseLong(root.getChild("BotQQ").getText());
-            masterQQ = Long.parseLong(root.getChild("MasterQQ").getText());
+            Element botQQElement = root.getChild("BotQQ");
+            Element masterQQElement = root.getChild("MasterQQ");
+            Element enabledElement = root.getChild("Enabled");
 
-            logger.debug("botQQ: " + botQQ);
-            logger.debug("masterQQ: " + masterQQ);
-            logger.debug("Parsing private settings xml done.");
+            // 判断xml文件本身是否合法
+            if(botQQElement==null || masterQQElement==null || enabledElement==null){
+                logger.warn("xml file is not legal!");
+                return false;
+            }
+
+            // 判断是否启用
+            if(!enabledElement.getText().equals("True")){
+                logger.warn("xml file is not enabled!");
+                return false;
+            }
+
+            // 根据文件设置静态变量
+            botQQ=Long.parseLong(botQQElement.getText());
+            masterQQ=Long.parseLong(masterQQElement.getText());
+            logger.debug("      botQQ: "+botQQ);
+            logger.debug("      masterQQ: "+masterQQ);
+
         } catch (Exception e) {
             logger.warn("Exception Occur!");
             logger.warn(e.getMessage());
+            return false;
         }
+        return true;
+    }
+
+    // 解析xml构造静态变量
+    static{
+        logger.info("Parsing settings xml start:");
+        logger.debug("Parsing private settings xml...");
+        if(!ParseInnerSettingsFile("/settings-private.xml")){
+            logger.error("Not Exists or Not Enabled or Not Legal!");
+            if(!ParseInnerSettingsFile("/settings.xml")){
+                logger.debug("Parsing public settings xml...");
+                logger.error("Not Exists or Not Enabled or Not Legal!");
+                System.exit(1);
+            }
+        }
+        logger.info("Parsing settings xml done.");
     }
 
 }
