@@ -1,6 +1,6 @@
 [![wakatime](https://wakatime.com/badge/user/cd8731d7-2366-4da2-8032-5bb5ad0d3122/project/4287dc1c-2b18-48d4-b88d-a5c722eaaa34.svg)](https://wakatime.com/badge/user/cd8731d7-2366-4da2-8032-5bb5ad0d3122/project/4287dc1c-2b18-48d4-b88d-a5c722eaaa34)
 # 🥰 Electric-Fan
-这是一个私人的Mirai QQ Robor  
+这是一个私人的Mirai QQ Robot  
 🦾电风扇是我的QQ机器人的名字，欢迎光临！
 
 ## ♻️ 如何配置:
