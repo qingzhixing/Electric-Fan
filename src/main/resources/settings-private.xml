@@ -1,4 +1,6 @@
 <root>
-    <botQQ>3239655448</botQQ>
-    <masterQQ>1542053897</masterQQ>
+    <!-- 是否启用该配置文件 -->
+    <Enable>True</Enable>
+    <BotQQ>3239655448</BotQQ>
+    <MasterQQ>1542053897</MasterQQ>
 </root>

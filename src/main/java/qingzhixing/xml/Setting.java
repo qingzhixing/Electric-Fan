@@ -24,14 +24,16 @@ public final class Setting {
     static{
         SAXBuilder builder = new SAXBuilder();
         try {
+            logger.debug("Parsing private settings xml start:");
             Document document = builder.build(FileConstructor.getInnerResource("/settings-private.xml"));
             Element root = document.getRootElement();
 
-            botQQ = Long.parseLong(root.getChild("botQQ").getText());
-            masterQQ = Long.parseLong(root.getChild("masterQQ").getText());
+            botQQ = Long.parseLong(root.getChild("BotQQ").getText());
+            masterQQ = Long.parseLong(root.getChild("MasterQQ").getText());
 
             logger.debug("botQQ: " + botQQ);
             logger.debug("masterQQ: " + masterQQ);
+            logger.debug("Parsing private settings xml done.");
         } catch (Exception e) {
             logger.warn("Exception Occur!");
             logger.warn(e.getMessage());

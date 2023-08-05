@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Eletric-Fan" />
+        <module name="Electric-Fan" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Eletric-Fan" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
