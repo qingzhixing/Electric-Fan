@@ -6,7 +6,7 @@ import net.mamoe.mirai.auth.BotAuthorization;
 import net.mamoe.mirai.contact.Friend;
 import net.mamoe.mirai.utils.BotConfiguration;
 import org.apache.logging.log4j.*;
-import qingzhixing.xml.Setting;
+import qingzhixing.xml.*;
 
 import java.io.File;
 
@@ -24,6 +24,7 @@ public final class Main {
     public static void main(String[] args) {
         System.out.println("Hello Electric-Fan!");
         logger.debug("Test Log4j");
+        ReplyParser.keywordReplies();
 
         Bot bot=ConstructBot();
 //        bot.login();
