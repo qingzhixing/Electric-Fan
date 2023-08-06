@@ -34,22 +34,12 @@ public class ReplyParser {
     static{
         logger.info("Keyword-Reply parse start:");
 
-        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        try {
-            Resource[]resources=resolver.getResources("classpath*:/*.kwd-reply.xml");
-            for(Resource resource:resources){
-                logger.info("Find keyword-reply file: "+resource.getFilename());
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        File[] files = FileConstructor.ScanFiles(".",filter);
-        if(files == null||files.length==0){
-            logger.warn("Find No keyword-reply files.");
+        Resource[] resources = FileConstructor.GetInnerResources("*.kwd-reply.xml");
+        if(resources==null||resources.length==0){
+            logger.error("No keyword-reply found.");
         }else{
-            for(File file:files){
-                logger.info("Find keyword-reply file: "+file.getName());
+            for(Resource resource:resources){
+                logger.debug("Parsing keyword-reply: "+resource.getFilename());
             }
         }
 

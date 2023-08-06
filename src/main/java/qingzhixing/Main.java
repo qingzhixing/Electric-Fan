@@ -22,8 +22,7 @@ public final class Main {
         });
     }
     public static void main(String[] args) {
-        System.out.println("Hello Electric-Fan!");
-        logger.debug("Test Log4j");
+        System.out.println("Running Electric-Fan!");
         ReplyParser.keywordReplies();
 
         Bot bot=ConstructBot();

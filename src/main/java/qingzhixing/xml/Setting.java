@@ -6,6 +6,9 @@ import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 import qingzhixing.utilities.FileConstructor;
 
+import java.io.File;
+import java.util.Objects;
+
 public final class Setting {
     private static final Logger logger = LogManager.getLogger(Setting.class);
 
@@ -30,7 +33,7 @@ public final class Setting {
         SAXBuilder builder = new SAXBuilder();
         try {
 
-            Document document = builder.build(FileConstructor.getInnerResource(path));
+            Document document = builder.build(Objects.requireNonNull(FileConstructor.GetInnerResource(path)).getURL());
             Element root = document.getRootElement();
 
             Element botQQElement = root.getChild("BotQQ");
@@ -67,9 +70,9 @@ public final class Setting {
     static{
         logger.info("Parsing settings xml start:");
         logger.debug("Parsing private settings xml...");
-        if(!ParseInnerSettingsFile("/settings-private.xml")){
+        if(!ParseInnerSettingsFile("settings-private.xml")){
             logger.error("Not Exists or Not Enabled or Not Legal!");
-            if(!ParseInnerSettingsFile("/settings.xml")){
+            if(!ParseInnerSettingsFile("settings.xml")){
                 logger.debug("Parsing public settings xml...");
                 logger.error("Not Exists or Not Enabled or Not Legal!");
                 logger.error("!!!!!PANIC:No Existing or Legal or Enabled Settings!!!!!");

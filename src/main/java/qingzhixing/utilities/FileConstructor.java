@@ -2,28 +2,45 @@ package qingzhixing.utilities;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.net.URL;
+import java.io.IOException;
 
 // 该类用于提供文件相关的辅助功能
 public final class FileConstructor {
     private static final Logger logger = LogManager.getLogger(FileConstructor.class);
     /*
-     * 用于根据path生成URL
-     * @param path 在jar包内部的地址
-     * @return 构造的url,失败则返回null
+     * 用于根据path生成Resources,支持*.*格式
+     * @param path 在jar包内部的地址，无前缀'/'
+     * @return 找到的Resource[],失败则返回null
      */
-    public static URL  getInnerResource(String path){
-        URL url = FileConstructor.class.getResource(path);
-        if (url == null) {
-            url = FileConstructor.class.getClassLoader().getResource(path);
+    public static Resource[] GetInnerResources(String path){
+        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        try {
+            return resolver.getResources("classpath*:/"+path);
+        } catch (IOException e) {
+            logger.error("Fail to get inner resources: " + path);
+            logger.error(e.getMessage());
+            return null;
         }
-        if(url==null){
-            logger.error("Failed to get the inner resource: " + path);
+    }
+
+    /*
+     * 返回符合path的第一个 Resource,支持*.*格式
+     * @param path 在jar包内部的地址，无前缀'/'
+     * @return 找到的Resource[]中的第一个,失败则返回null
+     */
+    public static Resource GetInnerResource(String path){
+        Resource[] resources = GetInnerResources(path);
+        if(resources == null || resources.length == 0){
+            logger.error("Fail to get single inner resource: " + path);
+            return null;
         }
-        return url;
+        return resources[0];
     }
 
     /*
@@ -39,24 +56,5 @@ public final class FileConstructor {
             return null;
         }
         return directory.listFiles(filter);
-    }
-
-    /*
-     * 返回jar包内部的目录路径
-     * @return jar包内部路径，失败返回null
-     */
-    public static String getInnerRootPath() {
-        // 简洁通过log4j2.xml获取根路径
-        URL url = FileConstructor.class.getResource("/log4j2.xml");
-        if (url == null) {
-            logger.error("Failed to get /log4j2.xml URL");
-            return null;
-        }
-        String rootPath = url.getPath().substring(0, url.getPath().lastIndexOf("/")+1);
-        if (rootPath == null) {
-            logger.error("Failed to get the inner root path");
-            return null;
-        }
-        return rootPath;
     }
 }
