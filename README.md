@@ -5,7 +5,7 @@
 
 ## 🍒 快速使用
 * 用户手册: [UserManual](./docs/UserManual.md)
-> 如果你希望快速部署 Electric-Fan，安装插件、并投入使用，请看这里
+> 如果你希望快速部署 Electric-Fan 并投入使用，请看这里
 
 ## 开发相关
 * 开发文档: [Github](./docs/Readme.md)
