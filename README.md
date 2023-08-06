@@ -1,29 +1,37 @@
 [![wakatime](https://wakatime.com/badge/user/cd8731d7-2366-4da2-8032-5bb5ad0d3122/project/4287dc1c-2b18-48d4-b88d-a5c722eaaa34.svg)](https://wakatime.com/badge/user/cd8731d7-2366-4da2-8032-5bb5ad0d3122/project/4287dc1c-2b18-48d4-b88d-a5c722eaaa34)
 # 🥰 Electric-Fan
-这是一个私人的Mirai QQ Robot  
-🦾电风扇是我的QQ机器人的名字，欢迎光临！
+这是一个基于 [Mirai](https://github.com/mamoe/mirai) 的 QQ Robot  
+🦾 电风扇 是我的 QQ机器人 的名字，欢迎光临！
 
-## ♻️ 如何配置:
-打开 `./src/main/resources/` 目录,找到 `settings.xml` 文件进行编辑  
-您也可以创建一个名为 `settings-private.xml` 的文件，和 `settings.xml` 等效
-> botQQ - 您的 bot 的QQ id  
-> masterQQ - 您的 QQ id ，用于进行线上运行时通报  
-> Enabled - 是否启用该配置文件  
+## 🍒 快速使用
+* 用户手册: [UserManual](./docs/UserManual.md)
+> 如果你希望快速部署 Electric-Fan，安装插件、并投入使用，请看这里
 
-### ⭕️ 注意：
-同时启用两个文件 private 优先  
-两个都不启用将会产生错误
+## 开发相关
+* 开发文档: [Github](./docs/Readme.md)
+* 开发计划: [milestones](./docs/milestones.md)
 
-## ✅ 如何运行:
+## ♨️ 协议
+```markdown
+MIT License
 
-1. 配置 `settings.xml` 或者 `settings-private.xml`
-2. 在项目根目录下执行:
-```shell
-mvn package
-java -jar ./Electric-Fan/target/Electric-Fan-1.0.jar
+Copyright (c) 2023 青紙星
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
-
-## 🌈 ToDo List:
-
-- [ ] 支持关键词回复
-- [ ] 实现外置 `settings.xml` 的读取
