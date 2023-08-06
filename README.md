@@ -13,3 +13,17 @@
 ### ⭕️ 注意：
 同时启用两个文件 private 优先  
 两个都不启用将会产生错误
+
+## ✅ 如何运行:
+
+1. 配置 `settings.xml` 或者 `settings-private.xml`
+2. 在项目根目录下执行:
+```shell
+mvn package
+java -jar ./Electric-Fan/target/Electric-Fan-1.0.jar
+```
+
+## 🌈 ToDo List:
+
+- [ ] 支持关键词回复
+- [ ] 实现外置 `settings.xml` 的读取

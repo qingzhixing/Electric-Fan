@@ -72,7 +72,7 @@ public final class Setting {
             if(!ParseInnerSettingsFile("/settings.xml")){
                 logger.debug("Parsing public settings xml...");
                 logger.error("Not Exists or Not Enabled or Not Legal!");
-                System.exit(1);
+                logger.error("!!!!!PANIC:No Existing or Legal or Enabled Settings!!!!!");
             }
         }
         logger.info("Parsing settings xml done.");
