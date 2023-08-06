@@ -2,16 +2,16 @@
 <keyword>
     <name>Electric-Fan</name>
     <keywordData>
-        <!--不写weight默认为1-->
-        <keyword weight="-1">
+        <!--不写priority默认为1-->
+        <keyword priority="-1">
             test
         </keyword>
         <replies>
-            <reply weight="1">
+            <reply priority="1">
                 Hello,World!
             </reply>
 
-            <!--不写weight默认为1-->
+            <!--不写priority默认为1-->
             <reply>
                 hello,world!
             </reply>
@@ -48,7 +48,7 @@
         </replies>
     </keywordData>
     <keywordData>
-        <keyword weight="0">
+        <keyword priority="0">
             草
         </keyword>
         <replies>

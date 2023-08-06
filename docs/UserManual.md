@@ -28,31 +28,33 @@
 **name - 该关键词回复组的名字，将在读入后在控制台INFO输出**  
 
 关键词的配置入下
-```xml
-<keywordData>
-        <!--不写weight默认为1-->
-        <keyword weight="1">
-            test
-        </keyword>
-        <replies>
-            <reply weight="1">
-                Hello,World!
-            </reply>
 
-            <!--不写weight默认为1-->
-            <reply>
-                hello,world!
-            </reply>
-        </replies>
-    </keywordData>
+```xml
+
+<keywordData>
+  <!--不写weight默认为1-->
+  <keyword priority="1">
+    test
+  </keyword>
+  <replies>
+    <reply priority="1">
+      Hello,World!
+    </reply>
+
+    <!--不写weight默认为1-->
+    <reply>
+      hello,world!
+    </reply>
+  </replies>
+</keywordData>
 ```
 * 每个关键词回复被包含在一个 `keywordData` 中
-  * 有一个 `weight` 属性，表示这个关键词检测的优先度，`weight` 越大优先度越高，默认为 `1`。  
+  * 有一个 `priority` 属性，表示这个关键词检测的优先度，`priority` 越大优先度越高，默认为 `1`。  
 * 一个 `keywordData` 包含一个 `keyword` 和 一个 `replies`。
 * `keyword` 中是需要检测的关键词。
 * `replies` 中包含多个 `reply`。
 * `reply` 中填写需要回复的 文本
-  * 有 `weigh` 属性，越大优先级越高，默认为 `1`。
+  * 有 `priority` 属性，越大回复概率越高，默认为 `1`, 小于等于 1 则该回复 沉默。
 </details>
 
 
