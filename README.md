@@ -7,7 +7,7 @@
 * 用户手册: [UserManual](./docs/UserManual.md)
 > 如果你希望快速部署 Electric-Fan 并投入使用，请看这里
 
-## 开发相关
+## 👩‍💻 开发相关
 * 开发文档: [Github](./docs/Readme.md)
 * 开发计划: [milestones](./docs/milestones.md)
 
