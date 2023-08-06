@@ -6,6 +6,7 @@ import net.mamoe.mirai.auth.BotAuthorization;
 import net.mamoe.mirai.contact.Friend;
 import net.mamoe.mirai.utils.BotConfiguration;
 import org.apache.logging.log4j.*;
+import org.jetbrains.annotations.NotNull;
 import qingzhixing.keyword.KeywordReplyHandler;
 import qingzhixing.xml.*;
 
@@ -13,7 +14,7 @@ import java.io.File;
 
 public final class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
-    private static Bot ConstructBot() {
+    private static @NotNull Bot ConstructBot() {
         // 验证码登陆
         return BotFactory.INSTANCE.newBot(Setting.botQQ(), BotAuthorization.byQRCode(), botConfiguration -> {
             botConfiguration.setProtocol(BotConfiguration.MiraiProtocol.ANDROID_WATCH);
