@@ -6,7 +6,6 @@ import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 import qingzhixing.utilities.FileConstructor;
 
-import java.io.File;
 import java.util.Objects;
 
 public final class Setting {
@@ -36,9 +35,9 @@ public final class Setting {
             Document document = builder.build(Objects.requireNonNull(FileConstructor.GetInnerResource(path)).getURL());
             Element root = document.getRootElement();
 
-            Element botQQElement = root.getChild("BotQQ");
-            Element masterQQElement = root.getChild("MasterQQ");
-            Element enabledElement = root.getChild("Enabled");
+            Element botQQElement = root.getChild("botQQ");
+            Element masterQQElement = root.getChild("masterQQ");
+            Element enabledElement = root.getChild("enabled");
 
             // 判断xml文件本身是否合法
             if(botQQElement==null || masterQQElement==null || enabledElement==null){

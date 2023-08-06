@@ -11,7 +11,7 @@
 ### 关键字解释
 **botQQ - 您的 bot 的QQ id**  
 **masterQQ - 您的 QQ id ，用于进行线上运行时通报**  
-**Enabled - 是否启用该配置文件**
+**enabled - 是否启用该配置文件 (True / False)**
 
 ### ⭕️ 注意
 同时启用两个文件 private 优先  

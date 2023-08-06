@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <keyword>
     <name>Electric-Fan</name>
-    <keywordData>
-        <!--不写priority默认为1-->
-        <keyword priority="-1">
+    <!--不写priority默认为1-->
+    <keywordData priority="1">
+        <keyword>
             test
         </keyword>
         <replies>
@@ -47,8 +47,8 @@
             </reply>
         </replies>
     </keywordData>
-    <keywordData>
-        <keyword priority="0">
+    <keywordData priority="2">
+        <keyword>
             草
         </keyword>
         <replies>
