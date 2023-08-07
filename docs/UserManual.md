@@ -5,17 +5,19 @@
 <details>
     <summary>1. 配置 设置文件</summary>
 
+**侵入式:**  
 打开 `./src/main/resources/` 目录,找到 `settings.xml` 文件进行编辑  
 您也可以创建一个名为 `settings-private.xml` 的文件，和 `settings.xml` 等效  
-
+**非侵入式:**  
+在jar包的运行路径下创建 `settings.xml` 即可
 ### 关键字解释
 **botQQ - 您的 bot 的QQ id**  
 **masterQQ - 您的 QQ id ，用于进行线上运行时通报**  
 **enabled - 是否启用该配置文件 (True / False)**
 
 ### ⭕️ 注意
-同时启用两个文件 private 优先  
-两个都不启用将会产生错误
+> 优先级：jar外部 > 内部private > 内部普通
+> 都不启用将会产生错误
 
 </details>
 
