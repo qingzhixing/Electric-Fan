@@ -3,12 +3,12 @@
 
 ## ♻️ 如何配置
 <details>
-    <summary>1. 配置 设置文件</summary>
+    <summary id="configuration">1. 配置 设置文件</summary>
 
-**侵入式:**  
+**🤯 侵入式:**  
 打开 `./src/main/resources/` 目录,找到 `settings.xml` 文件进行编辑  
 您也可以创建一个名为 `settings-private.xml` 的文件，和 `settings.xml` 等效  
-**非侵入式:**  
+**🎩 非侵入式:**  
 在jar包的运行路径下创建 `settings.xml` 即可
 ### 关键字解释
 **botQQ - 您的 bot 的QQ id**  
@@ -63,7 +63,7 @@
 
 ## ✅ 如何运行
 
-1. 进行配置
+1. [进行配置](#configuration)
 2. 在项目根目录下执行
 ```shell
 mvn package
