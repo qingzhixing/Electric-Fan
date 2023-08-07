@@ -123,7 +123,7 @@ public final class Setting {
         logger.info("Parsing outer settings xml...");
         // 解析外部设置
         if (ParseOuterSettingsFile(".","settings.xml")) {
-            logger.debug("Parsing outer settings xml done.");
+            logger.info("Parsing settings xml done.");
             return;
         }
         logger.warn("Not Exists or Not Enabled or Not Legal!");
@@ -131,7 +131,7 @@ public final class Setting {
 
         // 解析内部private 设置
         if (ParseInnerSettingsFile("settings-private.xml")) {
-            logger.debug("Parse private settings done.");
+            logger.info("Parsing settings xml done.");
             return;
         }
         logger.warn("Not Exists or Not Enabled or Not Legal!");
@@ -139,14 +139,12 @@ public final class Setting {
 
         // 解析内部public 设置
         if (ParseInnerSettingsFile("settings.xml")) {
-            logger.debug("Parse inner public settings done.");
+            logger.info("Parsing settings xml done.");
             return;
         }
         logger.error("Not Exists or Not Enabled or Not Legal!");
         logger.error("!!!!!PANIC:No Existing or Legal or Enabled Settings!!!!!");
 
-
-        logger.info("Parsing settings xml done.");
     }
 
     static {

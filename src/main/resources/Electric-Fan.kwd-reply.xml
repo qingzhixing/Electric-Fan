@@ -1,64 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <keyword>
     <name>Electric-Fan</name>
-    <!--不写priority默认为1-->
-    <keywordData priority="1">
-        <keyword>
-            test
-        </keyword>
-        <replies>
-            <reply priority="1">
-                Hello,World!
-            </reply>
-
-            <!--不写priority默认为1-->
-            <reply>
-                hello,world!
-            </reply>
-        </replies>
-    </keywordData>
     <keywordData>
-        <keyword>
-            电风扇
-        </keyword>
+        <keyword>电风扇</keyword>
         <!--空数据将会报错输出-->
         <replies>
-            <reply>
-                。?
-            </reply>
-            <reply>
-                你干什么？
-            </reply>
+            <reply>。?</reply>
+            <reply>你干什么？</reply>
         </replies>
     </keywordData>
     <keywordData>
-        <keyword>
-            ？？？？
-        </keyword>
+        <keyword>？？？？</keyword>
         <replies>
-            <reply>
-                ???
-            </reply>
-            <reply>
-                ？？？？？
-            </reply>
-            <reply>
-                草
-            </reply>
+            <reply>???</reply>
+            <reply>？？？？？</reply>
+            <reply>草</reply>
         </replies>
     </keywordData>
     <keywordData priority="2">
-        <keyword>
-            草
-        </keyword>
+        <keyword>草</keyword>
         <replies>
-            <reply>
-                草？
-            </reply>
-            <reply>
-                草草
-            </reply>
+            <reply>草？</reply>
+            <reply>草草</reply>
             <reply>呃，草</reply>
+        </replies>
+    </keywordData>
+    <keywordData>
+        <keyword>啊？</keyword>
+        <replies>
+            <reply>啊？</reply>
+            <reply>?</reply>
         </replies>
     </keywordData>
 </keyword>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<keyword>
+    <name>Test-Reply</name>
+    <!--不写priority默认为1-->
+    <keywordData priority="1">
+        <keyword>test</keyword>
+        <replies>
+            <reply priority="9">Hello,World!</reply>
+
+            <!--不写priority默认为1-->
+            <reply>hello,world!</reply>
+        </replies>
+    </keywordData>
+</keyword>

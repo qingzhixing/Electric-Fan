@@ -3,7 +3,9 @@ package qingzhixing;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
 import net.mamoe.mirai.auth.BotAuthorization;
+import net.mamoe.mirai.contact.ContactList;
 import net.mamoe.mirai.contact.Friend;
+import net.mamoe.mirai.contact.Group;
 import net.mamoe.mirai.utils.BotConfiguration;
 import org.apache.logging.log4j.*;
 import org.jetbrains.annotations.NotNull;
@@ -29,12 +31,17 @@ public final class Main {
         KeywordReplyHandler.keywordReplies=ReplyParser.keywordReplies();
 
         Bot bot=ConstructBot();
-//        bot.login();
+        bot.login();
 
         Friend master = bot.getFriend(Setting.masterQQ());
 
         if(master!=null){
             master.sendMessage("Electric-Fan is online🥰🥰🥰");
+        }
+
+        ContactList<Group> groups= bot.getGroups();
+        for(Group group:groups){
+            logger.info("Group: "+group.getId()+" "+group.getName());
         }
 
         bot.getEventChannel().registerListenerHost(new EventHandler());
