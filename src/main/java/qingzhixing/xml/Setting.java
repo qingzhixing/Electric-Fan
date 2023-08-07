@@ -6,6 +6,11 @@ import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 import qingzhixing.utilities.FileConstructor;
 
+import java.io.File;
+import java.io.FileFilter;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Objects;
 
 public final class Setting {
@@ -23,16 +28,14 @@ public final class Setting {
     }
 
     /*
-     * 用于解析jar包内的xml文件
-     * @param path xml文件路径
+     * 解析URL指向的settings.xml文件
+     * @param url 一个指向settings.xml文件的URL
      * @return 返回是否设置合法
      */
-    private static boolean ParseInnerSettingsFile(String path){
-        logger.debug("  parsing: "+path);
+    private static boolean ParseSettingsFile(URL url) {
         SAXBuilder builder = new SAXBuilder();
         try {
-
-            Document document = builder.build(Objects.requireNonNull(FileConstructor.GetInnerResource(path)).getURL());
+            Document document = builder.build(url);
             Element root = document.getRootElement();
 
             Element botQQElement = root.getChild("botQQ");
@@ -40,22 +43,22 @@ public final class Setting {
             Element enabledElement = root.getChild("enabled");
 
             // 判断xml文件本身是否合法
-            if(botQQElement==null || masterQQElement==null || enabledElement==null){
+            if (botQQElement == null || masterQQElement == null || enabledElement == null) {
                 logger.warn("xml file is not legal!");
                 return false;
             }
 
             // 判断是否启用
-            if(!enabledElement.getText().equals("True")){
+            if (!enabledElement.getText().equals("True")) {
                 logger.warn("xml file is not enabled!");
                 return false;
             }
 
             // 根据文件设置静态变量
-            botQQ=Long.parseLong(botQQElement.getText());
-            masterQQ=Long.parseLong(masterQQElement.getText());
-            logger.debug("      botQQ: "+botQQ);
-            logger.debug("      masterQQ: "+masterQQ);
+            botQQ = Long.parseLong(botQQElement.getText());
+            masterQQ = Long.parseLong(masterQQElement.getText());
+            logger.debug("      botQQ: " + botQQ);
+            logger.debug("      masterQQ: " + masterQQ);
 
         } catch (Exception e) {
             logger.warn("Exception Occur!");
@@ -65,19 +68,89 @@ public final class Setting {
         return true;
     }
 
-    // 解析xml构造静态变量
-    static{
-        logger.info("Parsing settings xml start:");
-        logger.debug("Parsing private settings xml...");
-        if(!ParseInnerSettingsFile("settings-private.xml")){
-            logger.error("Not Exists or Not Enabled or Not Legal!");
-            if(!ParseInnerSettingsFile("settings.xml")){
-                logger.debug("Parsing public settings xml...");
-                logger.error("Not Exists or Not Enabled or Not Legal!");
-                logger.error("!!!!!PANIC:No Existing or Legal or Enabled Settings!!!!!");
-            }
+    /*
+     * 用于解析jar包内的xml文件
+     * @param inner path xml文件路径
+     * @return 返回是否设置合法
+     */
+    private static boolean ParseInnerSettingsFile(String path) {
+        logger.debug("  parsing inner: " + path);
+        try {
+            URL url = Objects.requireNonNull(FileConstructor.GetInnerResource(path)).getURL();
+            return ParseSettingsFile(url);
+        } catch (IOException e) {
+            logger.warn("Cannot get URL of inner path: " + path);
+            return false;
         }
+    }
+
+    /*
+     * 用于解析jar包外部的xml文件
+     * @param outer path xml文件路径
+     * @return 返回是否设置合法
+     */
+    private static boolean ParseOuterSettingsFile(String dir,String fileName){
+        FileFilter filter = (File file) -> file.getName().trim().equals(fileName.trim());
+        File[] files = FileConstructor.ScanOuterFiles(dir,filter);
+
+        if(files == null){
+            logger.warn("Cannot get file: " + fileName+" in directory: " + dir);
+            return false;
+        }
+
+        logger.debug("Find files: "+files.length+" in directory: "+dir+" with name: "+fileName);
+        for(File f:files){
+            logger.debug("  "+f.getName());
+        }
+
+        if(files.length==0){
+            logger.warn("files is empty");
+            return false;
+        }
+
+        try {
+            URL url = files[0].toURI().toURL();
+            return ParseSettingsFile(url);
+        } catch (MalformedURLException e) {
+            logger.error("Cannot get URL of file: "+files[0].getName());
+            return false;
+        }
+    }
+
+    // 解析xml构造静态变量
+    private static void StaticInitialize() {
+        logger.info("Parsing settings xml start:");
+        logger.info("Parsing outer settings xml...");
+        // 解析外部设置
+        if (ParseOuterSettingsFile(".","settings.xml")) {
+            logger.debug("Parsing outer settings xml done.");
+            return;
+        }
+        logger.warn("Not Exists or Not Enabled or Not Legal!");
+        logger.debug("Parsing private settings xml...");
+
+        // 解析内部private 设置
+        if (ParseInnerSettingsFile("settings-private.xml")) {
+            logger.debug("Parse private settings done.");
+            return;
+        }
+        logger.warn("Not Exists or Not Enabled or Not Legal!");
+        logger.debug("Parsing public settings xml...");
+
+        // 解析内部public 设置
+        if (ParseInnerSettingsFile("settings.xml")) {
+            logger.debug("Parse inner public settings done.");
+            return;
+        }
+        logger.error("Not Exists or Not Enabled or Not Legal!");
+        logger.error("!!!!!PANIC:No Existing or Legal or Enabled Settings!!!!!");
+
+
         logger.info("Parsing settings xml done.");
+    }
+
+    static {
+        StaticInitialize();
     }
 
 }

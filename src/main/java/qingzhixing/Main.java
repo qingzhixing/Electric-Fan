@@ -29,7 +29,7 @@ public final class Main {
         KeywordReplyHandler.keywordReplies=ReplyParser.keywordReplies();
 
         Bot bot=ConstructBot();
-        bot.login();
+//        bot.login();
 
         Friend master = bot.getFriend(Setting.masterQQ());
 

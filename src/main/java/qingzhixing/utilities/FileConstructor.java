@@ -49,7 +49,7 @@ public final class FileConstructor {
      * @param filter FileFilter对象
      * @return 返回筛选后的文件数组,失败返回null
      */
-    public static File[]  ScanFiles(String dir, FileFilter filter){
+    public static File[] ScanOuterFiles(String dir, FileFilter filter){
         File directory = new File(dir);
         if(!directory.isDirectory()){
             logger.error("The directory: " + dir + " is not a directory");
