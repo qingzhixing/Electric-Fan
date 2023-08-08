@@ -21,7 +21,8 @@ public final class Main {
             botConfiguration.setProtocol(BotConfiguration.MiraiProtocol.ANDROID_WATCH);
             botConfiguration.setHeartbeatStrategy(BotConfiguration.HeartbeatStrategy.STAT_HB);
             botConfiguration.setCacheDir(new File("cache")); // 最终为 workingDir 目录中的 cache 目录
-            botConfiguration.enableContactCache();
+            botConfiguration.disableContactCache();
+            botConfiguration.fileBasedDeviceInfo();
         });
     }
     public static void main(String[] args) {

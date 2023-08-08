@@ -29,7 +29,9 @@ public class AtAskQuestion extends AbstractTextCommand {
             for (String deleteString : deleteStrings) {
                 replyContent = replyContent.replace(deleteString, "");
             }
-            if(replyContent.equals(content)){
+
+            // 未找到疑问词或者删完了就变空字符串了都不能继续了
+            if(replyContent.equals(content)|| replyContent.isEmpty()){
                 return;
             }
             // 成功回答则标记flag
