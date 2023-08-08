@@ -1,9 +1,6 @@
 package qingzhixing.utilities;
 
-import net.mamoe.mirai.message.data.Message;
-import net.mamoe.mirai.message.data.MessageChain;
-import net.mamoe.mirai.message.data.PlainText;
-import net.mamoe.mirai.message.data.SingleMessage;
+import net.mamoe.mirai.message.data.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +17,15 @@ public final class MessageTool {
      */
     public static List<PlainText> ExtractPlainText(@NotNull Message message) {
         return ExtractSingleMessageType(message,PlainText.class);
+    }
+
+    /*
+     * 从 message 中提取 At 并返回一个 List
+     * @param message 收到的Message
+     * @return 提取之后的 At List,失败返回null
+     */
+    public static List<At> ExtractAt(@NotNull Message message) {
+        return ExtractSingleMessageType(message,At.class);
     }
 
     /*
