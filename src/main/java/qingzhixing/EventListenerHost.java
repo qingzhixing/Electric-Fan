@@ -15,12 +15,7 @@ import qingzhixing.utilities.MessageTool;
 import java.util.Objects;
 
 public class EventListenerHost extends SimpleListenerHost {
-    private final Friend master;
     private static final Logger logger = LogManager.getLogger(EventListenerHost.class);
-
-    public EventListenerHost(Friend master) {
-        this.master = master;
-    }
 
     @Override
     public void handleException(@NotNull CoroutineContext context, @NotNull Throwable exception) {
@@ -29,8 +24,8 @@ public class EventListenerHost extends SimpleListenerHost {
         logger.error("context: " + context);
 
         // 报告master
-        if (master != null) {
-            master.sendMessage("Exception occurred in event handler: " + exception.getMessage());
+        if (Global.master != null) {
+            Global.master.sendMessage("Exception occurred in event handler: " + exception.getMessage());
         }
     }
 
@@ -63,8 +58,8 @@ public class EventListenerHost extends SimpleListenerHost {
         event.accept();
 
         // 报告master
-        if (master != null) {
-            master.sendMessage("Bot invited join group request: " + event.getGroupId() + " " + event.getGroupName());
+        if (Global.master != null) {
+            Global.master.sendMessage("Bot invited join group request: " + event.getGroupId() + " " + event.getGroupName());
         }
 
     }
@@ -75,8 +70,8 @@ public class EventListenerHost extends SimpleListenerHost {
         event.accept();
 
         // 报告master
-        if (master != null) {
-            master.sendMessage("New friend request: " + event.getFromId() + " " + event.getFromNick());
+        if (Global.master != null) {
+            Global.master.sendMessage("New friend request: " + event.getFromId() + " " + event.getFromNick());
         }
 
         // 开启问好协程

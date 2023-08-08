@@ -30,20 +30,20 @@ public final class Main {
 
         KeywordReplyHandler.keywordReplies=ReplyParser.keywordReplies();
 
-        Bot bot=ConstructBot();
-        bot.login();
+        Global.bot=ConstructBot();
+        Global.bot.login();
 
-        Friend master = bot.getFriend(Setting.masterQQ());
+        Global.master = Global.bot.getFriend(Setting.masterQQ());
 
-        if(master!=null){
-            master.sendMessage("Electric-Fan is online🥰🥰🥰");
+        if(Global.master!=null){
+            Global.master.sendMessage("Electric-Fan is online🥰🥰🥰");
         }
 
-        ContactList<Group> groups= bot.getGroups();
+        ContactList<Group> groups= Global.bot.getGroups();
         for(Group group:groups){
             logger.info("Group: "+group.getId()+" "+group.getName());
         }
 
-        bot.getEventChannel().registerListenerHost(new EventListenerHost(master));
+        Global.bot.getEventChannel().registerListenerHost(new EventListenerHost());
     }
 }
