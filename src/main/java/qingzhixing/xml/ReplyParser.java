@@ -197,6 +197,8 @@ public class ReplyParser {
                 resources.add(new FileSystemResource(file));
             }
         }
+
+        // 处理内部和外部的resources
         if (resources.isEmpty()) {
             logger.error("No keyword-reply found.");
         } else {
