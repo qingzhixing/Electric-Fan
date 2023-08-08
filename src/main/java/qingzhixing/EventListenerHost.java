@@ -5,6 +5,7 @@ import net.mamoe.mirai.contact.Friend;
 import net.mamoe.mirai.event.EventHandler;
 import net.mamoe.mirai.event.SimpleListenerHost;
 import net.mamoe.mirai.event.events.*;
+import net.mamoe.mirai.message.data.Message;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -32,13 +33,20 @@ public class EventListenerHost extends SimpleListenerHost {
         }
     }
 
+    /* 消息处理流程:
+     * 1. 处理文本指令
+     * 2. 未发现文本指令或无效文本指令则进行关键字回复
+     */
     @EventHandler
     public void MessageEventHandler(MessageEvent event) {
+        Message message = event.getMessage();
+
         // 关键词回复
-        String content = event.getMessage().contentToString();
         String reply = KeywordReplyHandler.DoReply(content);
         if (reply != null) {
             event.getSubject().sendMessage(reply);
+        }else{
+            logger.info("No reply for: " + content);
         }
     }
 
