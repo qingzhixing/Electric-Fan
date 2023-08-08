@@ -1,7 +1,6 @@
 package qingzhixing;
 
 import kotlin.coroutines.CoroutineContext;
-import net.mamoe.mirai.contact.Friend;
 import net.mamoe.mirai.event.EventHandler;
 import net.mamoe.mirai.event.SimpleListenerHost;
 import net.mamoe.mirai.event.events.*;
@@ -9,6 +8,7 @@ import net.mamoe.mirai.message.data.Message;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import qingzhixing.command.RegistedCommand;
 import qingzhixing.keyword.KeywordReplyHandler;
 import qingzhixing.utilities.MessageTool;
 
@@ -36,8 +36,17 @@ public class EventListenerHost extends SimpleListenerHost {
     @EventHandler
     public void MessageEventHandler(MessageEvent event) {
         Message message = event.getMessage();
+        // 文本指令处理
+        logger.info("Command handling");
+        for(var command : RegistedCommand.registedCommandList()) {
+            logger.debug("Command: " + command.toString());
+            if (command.Match(message,event.getSubject())) {
+                return;
+            }
+        }
 
         // 关键词回复
+        logger.info("Keyword reply handling");
         var plainTextList = MessageTool.ExtractPlainText(message);
         if (plainTextList == null || plainTextList.isEmpty()) {
             logger.debug("plainTextList is Empty or null");

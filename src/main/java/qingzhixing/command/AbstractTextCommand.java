@@ -1,6 +1,6 @@
 package qingzhixing.command;
 
-import net.mamoe.mirai.contact.Member;
+import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.message.data.At;
 import net.mamoe.mirai.message.data.Message;
 import org.apache.logging.log4j.LogManager;
@@ -52,7 +52,7 @@ public abstract class AbstractTextCommand {
      * @param replyTarget 回复对象
      * @return 是否匹配，若匹配则返回是否阻断下一步操作(不让下一个command匹配)
      */
-    public boolean Match(Message message, Member replyTarget) {
+    public boolean Match(Message message, Contact replyTarget) {
         logger.info("Matching command: " + keyword + " in " + message.toString());
 
         // 判断At
@@ -93,5 +93,5 @@ public abstract class AbstractTextCommand {
      * @param replyTarget 回复对象
      * @return 是否阻断下一步操作
      */
-    protected abstract boolean Execute(Message message, Member replyTarget);
+    protected abstract boolean Execute(Message message, Contact replyTarget);
 }

@@ -1,8 +1,7 @@
 package qingzhixing.command;
 
-import net.mamoe.mirai.contact.Member;
+import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.message.data.Message;
-import net.mamoe.mirai.message.data.MessageSource;
 
 public class TestCommand extends AbstractTextCommand {
     public TestCommand() {
@@ -10,7 +9,7 @@ public class TestCommand extends AbstractTextCommand {
     }
 
     @Override
-    protected boolean Execute(Message message, Member replyTarget) {
+    protected boolean Execute(Message message, Contact replyTarget) {
         replyTarget.sendMessage(description);
         return true;
     }

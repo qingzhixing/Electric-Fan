@@ -7,7 +7,7 @@ import java.util.List;
  * 用于管理已经注册过的命令
  */
 public class RegistedCommand {
-    private static List<AbstractTextCommand> registedCommandList = new ArrayList<>();
+    private static final List<AbstractTextCommand> registedCommandList = new ArrayList<>();
 
     public static List<AbstractTextCommand> registedCommandList() {
         return registedCommandList;
@@ -19,5 +19,9 @@ public class RegistedCommand {
 
     private static void StaticInitialize(){
         RegistCommand(new TestCommand());
+    }
+
+    static {
+        StaticInitialize();
     }
 }

@@ -4,7 +4,6 @@ import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
 import net.mamoe.mirai.auth.BotAuthorization;
 import net.mamoe.mirai.contact.ContactList;
-import net.mamoe.mirai.contact.Friend;
 import net.mamoe.mirai.contact.Group;
 import net.mamoe.mirai.utils.BotConfiguration;
 import org.apache.logging.log4j.*;
@@ -20,7 +19,7 @@ public final class Main {
         // 验证码登陆
         return BotFactory.INSTANCE.newBot(Setting.botQQ(), BotAuthorization.byQRCode(), botConfiguration -> {
             botConfiguration.setProtocol(BotConfiguration.MiraiProtocol.ANDROID_WATCH);
-            botConfiguration.setHeartbeatStrategy(BotConfiguration.HeartbeatStrategy.REGISTER);
+            botConfiguration.setHeartbeatStrategy(BotConfiguration.HeartbeatStrategy.STAT_HB);
             botConfiguration.setCacheDir(new File("cache")); // 最终为 workingDir 目录中的 cache 目录
             botConfiguration.enableContactCache();
         });
