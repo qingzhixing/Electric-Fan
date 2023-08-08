@@ -16,3 +16,4 @@
 还有一个 `CommandType` 对象分别表示三种类型的 指令  
 有一个 boolean 类型的变量表示 使用指令时是否需要 at robot  
 有一个 `description` 进行描述该指令功能
+`name` 标记这条指令的名称

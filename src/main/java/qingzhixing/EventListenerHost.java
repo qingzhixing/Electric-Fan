@@ -39,7 +39,7 @@ public class EventListenerHost extends SimpleListenerHost {
         // 文本指令处理
         logger.info("Command handling");
         for(var command : RegistedCommand.registedCommandList()) {
-            logger.debug("Command: " + command.toString());
+            logger.debug("Command: " + command.name()+" "+command.description()+" ");
             if (command.Match(message,event.getSubject())) {
                 return;
             }

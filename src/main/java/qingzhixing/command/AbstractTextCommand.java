@@ -27,6 +27,16 @@ public abstract class AbstractTextCommand {
 
     protected String description;
 
+    protected String name;
+
+    public String description() {
+        return description;
+    }
+
+    public String name() {
+        return name;
+    }
+
     public String keyword() {
         return keyword;
     }
@@ -39,7 +49,8 @@ public abstract class AbstractTextCommand {
         return needAtBot;
     }
 
-    public AbstractTextCommand(String keyword, CommandType commandType, boolean needAtBot, String description) {
+    public AbstractTextCommand(String name, String keyword, CommandType commandType, boolean needAtBot, String description) {
+        this.name = name;
         this.keyword = keyword;
         this.commandType = commandType;
         this.needAtBot = needAtBot;

@@ -18,7 +18,8 @@ public class RegistedCommand {
     }
 
     private static void StaticInitialize(){
-        RegistCommand(new TestCommand());
+        RegistCommand(new AtTestCommand());
+        RegistCommand(new AtAskQuestion());
     }
 
     static {
