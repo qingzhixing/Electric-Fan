@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import qingzhixing.keyword.KeywordReplyHandler;
+import qingzhixing.utilities.MessageTool;
 
 import java.util.Objects;
 
@@ -42,11 +43,17 @@ public class EventListenerHost extends SimpleListenerHost {
         Message message = event.getMessage();
 
         // 关键词回复
-        String reply = KeywordReplyHandler.DoReply(content);
+        var plainTextList = MessageTool.ExtractPlainText(message);
+        if (plainTextList == null || plainTextList.isEmpty()) {
+            logger.debug("plainTextList is Empty or null");
+            return;
+        }
+        String plainTextContent = MessageTool.PlainTextListToString(plainTextList);
+        String reply = KeywordReplyHandler.DoReply(plainTextContent);
         if (reply != null) {
             event.getSubject().sendMessage(reply);
-        }else{
-            logger.info("No reply for: " + content);
+        } else {
+            logger.info("No reply for: " + plainTextContent);
         }
     }
 
