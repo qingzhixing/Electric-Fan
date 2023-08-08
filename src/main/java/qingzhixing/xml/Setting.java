@@ -90,29 +90,17 @@ public final class Setting {
      * @return 返回是否设置合法
      */
     private static boolean ParseOuterSettingsFile(String dir,String fileName){
-        FileFilter filter = (File file) -> file.getName().trim().equals(fileName.trim());
-        File[] files = FileConstructor.ScanOuterFiles(dir,filter);
-
-        if(files == null){
-            logger.warn("Cannot get file: " + fileName+" in directory: " + dir);
-            return false;
-        }
-
-        logger.debug("Find files: "+files.length+" in directory: "+dir+" with name: "+fileName);
-        for(File f:files){
-            logger.debug("  "+f.getName());
-        }
-
-        if(files.length==0){
-            logger.warn("files is empty");
+        File settingsFile=FileConstructor.ScanOuterFile(dir,fileName);
+        if(settingsFile==null){
+            logger.warn("Error Occur! Parse failed.");
             return false;
         }
 
         try {
-            URL url = files[0].toURI().toURL();
+            URL url = settingsFile.toURI().toURL();
             return ParseSettingsFile(url);
         } catch (MalformedURLException e) {
-            logger.error("Cannot get URL of file: "+files[0].getName());
+            logger.error("Cannot get URL of file: "+settingsFile.getName());
             return false;
         }
     }

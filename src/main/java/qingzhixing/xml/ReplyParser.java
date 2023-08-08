@@ -6,14 +6,18 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import qingzhixing.keyword.KeywordReply;
 import qingzhixing.keyword.Reply;
 import qingzhixing.utilities.FileConstructor;
 
+import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -166,12 +170,34 @@ public class ReplyParser {
 
     }
 
-    static {
+    private static void StaticInitialize() {
         logger.info("Keyword-Reply parse start:");
 
-        // 读取文件
-        Resource[] resources = FileConstructor.GetInnerResources("*.kwd-reply.xml");
-        if (resources == null || resources.length == 0) {
+        // 用于存放内部和外部的文件
+        List<Resource> resources = new ArrayList<>();
+
+        // 处理 Inner files
+        logger.info("Finding Inner files");
+        Resource[] innerResources = FileConstructor.GetInnerResources("*.kwd-reply.xml");
+        if (innerResources == null || innerResources.length == 0) {
+            logger.warn("No inner keyword-reply found.");
+        } else {
+            resources.addAll(List.of(innerResources));
+        }
+
+        // 处理 Outer files
+        logger.info("Finding Outer files");
+        FileFilter filter = (File file) -> file.getName().trim().endsWith(".kwd-reply.xml");
+        File[] outerFiles = FileConstructor.ScanOuterFiles(".", filter);
+
+        if (outerFiles == null || outerFiles.length == 0) {
+            logger.warn("No outer keyword-reply found.");
+        } else {
+            for (File file : outerFiles) {
+                resources.add(new FileSystemResource(file));
+            }
+        }
+        if (resources.isEmpty()) {
             logger.error("No keyword-reply found.");
         } else {
             // 解析文件
@@ -187,6 +213,10 @@ public class ReplyParser {
         }
 
         logger.info("Keyword-Reply parse done.");
+    }
+
+    static {
+        StaticInitialize();
     }
 
 }
