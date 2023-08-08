@@ -1,5 +1,6 @@
 package qingzhixing.command;
 
+import net.mamoe.mirai.contact.Member;
 import net.mamoe.mirai.message.data.At;
 import net.mamoe.mirai.message.data.Message;
 import org.apache.logging.log4j.LogManager;
@@ -22,6 +23,10 @@ public abstract class AbstractTextCommand {
 
     protected CommandType commandType;
 
+    protected boolean needAtBot;
+
+    protected String description;
+
     public String keyword() {
         return keyword;
     }
@@ -34,20 +39,20 @@ public abstract class AbstractTextCommand {
         return needAtBot;
     }
 
-    protected boolean needAtBot;
-
-    public AbstractTextCommand() {
-        keyword = "NONE!";
-        commandType = CommandType.BEGIN;
-        needAtBot = true;
+    public AbstractTextCommand(String keyword, CommandType commandType, boolean needAtBot, String description) {
+        this.keyword = keyword;
+        this.commandType = commandType;
+        this.needAtBot = needAtBot;
+        this.description = description;
     }
 
     /*
      * 进行指令匹配
      * @param message 传入的待处理Message
+     * @param replyTarget 回复对象
      * @return 是否匹配，若匹配则返回是否阻断下一步操作(不让下一个command匹配)
      */
-    public boolean Match(Message message) {
+    public boolean Match(Message message, Member replyTarget) {
         logger.info("Matching command: " + keyword + " in " + message.toString());
 
         // 判断At
@@ -77,13 +82,16 @@ public abstract class AbstractTextCommand {
                 break;
         }
 
-        return Execute(message);
+        logger.info("Match Success");
+
+        return Execute(message, replyTarget);
     }
 
     /*
      * 在匹配的基础上进行执行
      * @param message 原消息
+     * @param replyTarget 回复对象
      * @return 是否阻断下一步操作
      */
-    protected abstract boolean Execute(Message message);
+    protected abstract boolean Execute(Message message, Member replyTarget);
 }
