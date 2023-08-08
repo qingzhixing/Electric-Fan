@@ -44,24 +44,25 @@ public class EventListenerHost extends SimpleListenerHost {
 
     @EventHandler
     public void BotInvitedJoinGroupRequestEventHandler(BotInvitedJoinGroupRequestEvent event) {
+        // 直接同意
+        event.accept();
+
         // 报告master
         if (master != null) {
             master.sendMessage("Bot invited join group request: " + event.getGroupId() + " " + event.getGroupName());
         }
 
-        // 直接同意
-        event.accept();
     }
 
     @EventHandler
     public void FriendRequestHandler(NewFriendRequestEvent event) {
+        // 直接同意
+        event.accept();
+
         // 报告master
         if (master != null) {
             master.sendMessage("New friend request: " + event.getFromId() + " " + event.getFromNick());
         }
-
-        // 直接同意
-        event.accept();
 
         // 开启问好协程
         new Thread(() -> {
@@ -69,9 +70,9 @@ public class EventListenerHost extends SimpleListenerHost {
                 Thread.sleep(1000);
                 Objects.requireNonNull(event.getBot().getFriend(event.getFromId())).sendMessage("你好泥塑随");
             } catch (Exception e) {
-                logger.error("Thread Error: "+ e.getMessage());
+                logger.error("Thread Error: " + e.getMessage());
             }
-        });
+        }).start();
     }
 
 }
