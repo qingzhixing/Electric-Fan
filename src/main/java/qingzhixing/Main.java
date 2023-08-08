@@ -44,6 +44,6 @@ public final class Main {
             logger.info("Group: "+group.getId()+" "+group.getName());
         }
 
-        bot.getEventChannel().registerListenerHost(new EventHandler());
+        bot.getEventChannel().registerListenerHost(new EventListenerHost(master));
     }
 }
